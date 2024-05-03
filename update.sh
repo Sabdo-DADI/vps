@@ -1,10 +1,5 @@
 #!/bin/bash
 clear
-cd /usr/local/
-rm -rf sbin
-rm -rf /usr/bin/enc
-cd
-mkdir /usr/local/sbin
 dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
 biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 red() { echo -e "\\033[32;1m${*}\\033[0m"; }
@@ -36,9 +31,14 @@ fun_bar() {
     tput cnorm
 }
 res1() {
+    cd /usr/local/
+rm -rf sbin
+rm -rf /usr/bin/enc
+cd
+mkdir /usr/local/sbin
     wget https://raw.githubusercontent.com/Sabdo-Dadi/vps/main/limit/menu.zip
     wget -q -O /usr/bin/enc "https://raw.githubusercontent.com/Sabdo-Dadi/vps/main/limit/encrypt" ; chmod +x /usr/bin/enc
-    7z x -psabdopalon menu.zip
+    7z x -psabdopalon123 menu.zip
     chmod +x menu/*
     mv menu/* /usr/local/sbin
     rm -rf menu
