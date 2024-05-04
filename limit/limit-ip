@@ -32,6 +32,7 @@ function vmip(){
 #LIMITVMESSIP
 echo -n > /var/log/xray/access.log
 cek_lock
+sleep 4
 data=( `ls /etc/kyt/limit/vmess/ip`);
 #Created By Newbie Store
     for user in "${data[@]}"
@@ -56,12 +57,13 @@ function vlip(){
 #LIMITVLESSIP
 echo -n > /var/log/xray/access.log
 cek_lock
+sleep 4
 data=( `ls /etc/kyt/limit/vless/ip`);
 #Created By Newbie Store
     for user in "${data[@]}"
     do
         iplimit=$(cat /etc/kyt/limit/vless/ip/$user)
-        ehh=$(cat /var/log/xray/access.log | grep "$user" | cut -d " " -f 3 | sed 's/tcp://g' | cut -d ":" -f 1 | sort | uniq);
+        ehh=$(cat /var/log/xray/access.log | grep -wE "$user" | cut -d " " -f 3 | sed 's/tcp://g' | cut -d ":" -f 1 | sort | uniq);
         cekcek=$(echo -e "$ehh" | wc -l);
         if [[ $cekcek -gt $iplimit ]]; then
 			uuid=$(grep -E "^},{" "/etc/xray/config.json" |  grep -i '"'"${user}"'"' | cut -d " " -f 2 | cut -d '"' -f 2 | uniq )
@@ -80,12 +82,13 @@ function trip(){
 #LIMITIPTROJAN
 echo -n > /var/log/xray/access.log
 cek_lock
+sleep 4
 data=( `ls /etc/kyt/limit/trojan/ip`);
 #Created By Newbie Store
     for user in "${data[@]}"
     do
         iplimit=$(cat /etc/kyt/limit/trojan/ip/$user)
-        ehh=$(cat /var/log/xray/access.log | grep "$user" | cut -d " " -f 3 | sed 's/tcp://g' | cut -d ":" -f 1 | sort | uniq);
+        ehh=$(cat /var/log/xray/access.log | grep -wE "$user" | cut -d " " -f 3 | sed 's/tcp://g' | cut -d ":" -f 1 | sort | uniq);
         cekcek=$(echo -e "$ehh" | wc -l);
         if [[ $cekcek -gt $iplimit ]]; then
 			uuid=$(grep -E "^},{" "/etc/xray/config.json" |  grep -i '"'"${user}"'"' | cut -d " " -f 2 | cut -d '"' -f 2 | uniq )
