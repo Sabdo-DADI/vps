@@ -10,8 +10,8 @@ TEXT="
 <b>⚠️ NOTIFICATIONS MULTI LOGIN ⚠️</b>
 <code>────────────────────</code>
 <code>Username  : </code><code>$user</code>
-<code>Limit Ip    : </code><code>$data</code>
-<code>Login Ip    : </code><code>$data</code>
+<code>Limit Ip    : </code><code>$iplimit</code>
+<code>Login Ip    : </code><code>$cekcek</code>
 <code>────────────────────</code>
 "
 curl -s --max-time $TIME -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
@@ -30,7 +30,6 @@ fi
 }
 function vmip(){
 #LIMITVMESSIP
-echo -n > /var/log/xray/access.log
 cek_lock
 sleep 4
 data=( `ls /etc/kyt/limit/vmess/ip`);
@@ -55,7 +54,6 @@ data=( `ls /etc/kyt/limit/vmess/ip`);
 }
 function vlip(){
 #LIMITVLESSIP
-echo -n > /var/log/xray/access.log
 cek_lock
 sleep 4
 data=( `ls /etc/kyt/limit/vless/ip`);
@@ -80,7 +78,6 @@ data=( `ls /etc/kyt/limit/vless/ip`);
 }
 function trip(){
 #LIMITIPTROJAN
-echo -n > /var/log/xray/access.log
 cek_lock
 sleep 4
 data=( `ls /etc/kyt/limit/trojan/ip`);
